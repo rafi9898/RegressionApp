@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledBox = styled.div`
   width: 100%;
@@ -93,11 +94,12 @@ export const StyledDivider = styled.div`
   padding: 10px 0px;
 `;
 
-export const StyledLabel = styled.span`
+export const StyledLabel = styled(Link)`
   font-size: 19px;
   text-align: center;
   letter-spacing: 0.35px;
   color: #2d2d2d;
   opacity: 1;
   cursor: pointer;
+  text-decoration: none;
 `;
