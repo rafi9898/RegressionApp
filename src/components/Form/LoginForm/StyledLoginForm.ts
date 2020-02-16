@@ -102,4 +102,9 @@ export const StyledLabel = styled(Link)`
   opacity: 1;
   cursor: pointer;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: #2d2d2d;
+  }
 `;

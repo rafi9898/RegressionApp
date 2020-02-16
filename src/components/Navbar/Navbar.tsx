@@ -17,7 +17,7 @@ const Navbar = () => {
     <StyledNavbar>
       <StyledFlex>
         <StyledLogoContainer>
-          <StyledLogo>REGAPP</StyledLogo>
+          <StyledLogo to="/dashboard">REGAPP</StyledLogo>
         </StyledLogoContainer>
 
         <StyledUserItemContainer>
