@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledNavbar = styled.nav`
   width: 100%;
@@ -7,6 +8,7 @@ export const StyledNavbar = styled.nav`
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 100;
 `;
 
 export const StyledFlex = styled.div`
@@ -31,13 +33,19 @@ export const StyledUserItemContainer = styled.div`
   align-items: center;
 `;
 
-export const StyledLogo = styled.h1`
+export const StyledLogo = styled(Link)`
   color: #fbfbfb;
   font-size: 44px;
   letter-spacing: 0.2px;
   font-weight: bold;
   text-shadow: 0px 3px 6px #00000029;
   cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: #fbfbfb;
+  }
 `;
 
 export const StyledLogoutIcon = styled.img`
