@@ -9,25 +9,31 @@ import {
   StyledInput,
   StyledSubmitButton,
   StyledLabel
-} from "./StyledLoginForm";
+} from "../LoginForm/StyledLoginForm";
 import userIcon from "../../../assets/User.svg";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   return (
     <StyledBox>
       <StyledContainer>
         <StyledFlex>
           <StyledUserIcon src={userIcon} alt="User icon" />
-          <StyledFormTitle>Log in to your account</StyledFormTitle>
+          <StyledFormTitle>Register now</StyledFormTitle>
 
           <StyledForm>
             <StyledInput type="email" placeholder="Email" required />
+            <StyledInput type="text" placeholder="Login" required />
             <StyledInput type="password" placeholder="Password" required />
-            <StyledSubmitButton>Sign In</StyledSubmitButton>
+            <StyledInput
+              type="password"
+              placeholder="Repeat password"
+              required
+            />
+            <StyledSubmitButton>Sign Up</StyledSubmitButton>
           </StyledForm>
 
-          <StyledLabel to="/register">
-            You do not have an account? Create now!
+          <StyledLabel to="/">
+            Do you already have an account? Sign In!
           </StyledLabel>
         </StyledFlex>
       </StyledContainer>
@@ -35,4 +41,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
