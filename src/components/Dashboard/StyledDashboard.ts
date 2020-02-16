@@ -25,8 +25,7 @@ export const StyledItemContainer = styled(Link)`
   align-items: center;
   flex-direction: column;
   padding: 25px 25px;
-  background-color: ${(p: ItemProps) =>
-    p.colorItem ? p.colorItem : "#458bca"};
+  background-color: ${(p: ItemProps) => (p.color ? p.color : "#458bca")};
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 12px;
   opacity: 1;
@@ -59,5 +58,5 @@ export const StyledItemTitle = styled.h3`
 `;
 
 interface ItemProps {
-  colorItem?: string;
+  color?: string;
 }
