@@ -13,14 +13,14 @@ const ItemsForm = () => {
         <Item
           icon={createIcon}
           titleItem="Create New"
-          colorItem="#458BCA"
+          color="#458BCA"
           link="/regression"
         />
         <Item
           icon={editIcon}
           titleItem="Edit List"
-          colorItem="#5DB85B"
-          link="/regression"
+          color="#5DB85B"
+          link="/testcases"
         />
       </StyledContainerForm>
 
@@ -28,13 +28,13 @@ const ItemsForm = () => {
         <Item
           icon={historyIcon}
           titleItem="History"
-          colorItem="#D9A14F"
+          color="#D9A14F"
           link="/regression"
         />
         <Item
           icon={projectIcon}
           titleItem="Add Project"
-          colorItem="#D95352"
+          color="#D95352"
           link="/regression"
         />
       </StyledContainerForm>
