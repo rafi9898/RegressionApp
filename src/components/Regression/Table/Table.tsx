@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { StyledTableContainer, StyledViewIcon } from "./StyledTable";
+import {
+  StyledTableContainer,
+  StyledViewIcon,
+  StyledActionLink
+} from "./StyledTable";
 import { Table as TableBootstrap } from "react-bootstrap";
 import viewIcon from "../../../assets/View.svg";
 
@@ -26,7 +30,9 @@ class Table extends Component<TableProps> {
                 Done
               </td>
               <td>
-                <StyledViewIcon src={viewIcon} alt="View icon" />
+                <StyledActionLink to="/retest/1">
+                  <StyledViewIcon src={viewIcon} alt="View icon" />
+                </StyledActionLink>
               </td>
             </tr>
             <tr>
@@ -37,7 +43,9 @@ class Table extends Component<TableProps> {
                 Pending
               </td>
               <td>
-                <StyledViewIcon src={viewIcon} alt="View icon" />
+                <StyledActionLink to="/retest/1">
+                  <StyledViewIcon src={viewIcon} alt="View icon" />
+                </StyledActionLink>
               </td>
             </tr>
             <tr>
@@ -48,7 +56,9 @@ class Table extends Component<TableProps> {
                 Done
               </td>
               <td>
-                <StyledViewIcon src={viewIcon} alt="View icon" />
+                <StyledActionLink to="/retest/1">
+                  <StyledViewIcon src={viewIcon} alt="View icon" />
+                </StyledActionLink>
               </td>
             </tr>
           </tbody>
