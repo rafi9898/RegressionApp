@@ -58,6 +58,25 @@ export const StyledInput = styled.input`
   }
 `;
 
+export const StyledTextArea = styled.textarea`
+  width: 100%;
+  height: 140px;
+  color: #5b5b5b;
+  opacity: 1;
+  font-size: 17px;
+  outline: none;
+  font-weight: 400;
+  border: none;
+  border-bottom: 0.5px solid #707070;
+  margin-top: 20px;
+  transition: all 0.3s;
+
+  &:focus {
+    font-size: 19px;
+    transition: all 0.3s;
+  }
+`;
+
 export const StyledSelect = styled.select`
   width: 100%;
   height: 36px;

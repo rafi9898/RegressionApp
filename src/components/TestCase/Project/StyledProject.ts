@@ -36,6 +36,10 @@ export const StyledAddIcon = styled(Link)`
   }
 `;
 
+export const StyledActionLink = styled(Link)`
+  cursor: pointer;
+`;
+
 export const StyledViewIcon = styled.img`
   width: 33px;
   cursor: pointer;

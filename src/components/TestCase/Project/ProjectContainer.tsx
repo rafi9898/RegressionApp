@@ -6,7 +6,8 @@ import {
   StyledTrashIcon,
   StyledLabel,
   StyledDelteContainer,
-  StyledViewIcon
+  StyledViewIcon,
+  StyledActionLink
 } from "./StyledProject";
 import SearchBar from "./SearchBar/SearchBar";
 import { Table as TableBootstrap } from "react-bootstrap";
@@ -32,7 +33,9 @@ const ProjectContainer = () => {
               <td>Wyszukiwarka</td>
               <td>13</td>
               <td>
-                <StyledViewIcon src={editIcon} alt="Edit icon" />
+                <StyledActionLink to="/testcase-edit/1">
+                  <StyledViewIcon src={editIcon} alt="Edit icon" />
+                </StyledActionLink>
               </td>
               <td>
                 <StyledViewIcon
