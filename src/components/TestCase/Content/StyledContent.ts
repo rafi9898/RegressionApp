@@ -35,6 +35,18 @@ export const StyledMoreButton = styled.button`
     background: #3b76c4;
     transition: all 0.3s;
   }
+
+  @media (max-width: 1100px) {
+    width: 65%;
+    font-size: 18px;
+    height: 45px;
+  }
+
+  @media (max-width: 700px) {
+    width: 80%;
+    font-size: 16px;
+    height: 45px;
+  }
 `;
 
 export const StyledItemContainer = styled(Link)`
@@ -54,12 +66,24 @@ export const StyledItemContainer = styled(Link)`
     transform: scale(1.05);
     text-decoration: none;
   }
+
+  @media (max-width: 1200px) {
+    width: 40%;
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export const StyledProjectIcon = styled.img`
   width: 53px;
   margin: 0 auto;
   margin-bottom: 20px;
+
+  @media (max-width: 700px) {
+    width: 40px;
+  }
 `;
 
 export const StyledItemTitle = styled.h4`
@@ -69,6 +93,14 @@ export const StyledItemTitle = styled.h4`
   text-align: center;
   margin-bottom: 12px;
   font-weight: 400;
+
+  @media (max-width: 1200px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 18px;
+  }
 `;
 
 export const StyledItemDesc = styled.p`
@@ -77,4 +109,8 @@ export const StyledItemDesc = styled.p`
   color: #373737;
   opacity: 1;
   font-weight: 400;
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;

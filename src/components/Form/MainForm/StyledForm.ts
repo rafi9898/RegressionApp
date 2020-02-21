@@ -4,15 +4,28 @@ export const StyledBox = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 160px;
+
+  @media (max-width: 700px) {
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
 `;
 
 export const StyledContainer = styled.div`
-  width: 55vw;
+  width: 60vw;
   background-color: #ffffff;
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   padding: 40px 40px;
   margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    width: 80vw;
+  }
+
+  @media (max-width: 700px) {
+    width: 90vw;
+  }
 `;
 
 export const StyledFlex = styled.div`
@@ -30,6 +43,14 @@ export const StyledFormTitle = styled.h2`
   opacity: 1;
   font-weight: 400;
   margin-top: 8px;
+
+  @media (max-width: 1100px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 21px;
+  }
 `;
 
 export const StyledForm = styled.form`
@@ -37,6 +58,14 @@ export const StyledForm = styled.form`
   margin: 0 auto;
   height: 100%;
   margin-bottom: 26px;
+
+  @media (max-width: 1100px) {
+    width: 80%;
+  }
+
+  @media (max-width: 700px) {
+    width: 90%;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -55,6 +84,14 @@ export const StyledInput = styled.input`
   &:focus {
     font-size: 19px;
     transition: all 0.3s;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 14px;
   }
 `;
 
@@ -75,6 +112,14 @@ export const StyledTextArea = styled.textarea`
     font-size: 19px;
     transition: all 0.3s;
   }
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const StyledSelect = styled.select`
@@ -94,6 +139,14 @@ export const StyledSelect = styled.select`
   &:focus {
     font-size: 19px;
     transition: all 0.3s;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 14px;
   }
 `;
 
@@ -127,6 +180,14 @@ export const StyledLabelCheckbox = styled.span`
     font-size: 19px;
     transition: all 0.3s;
   }
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const StyledOption = styled.option``;
@@ -152,6 +213,16 @@ export const StyledSubmitButton = styled.button`
   &:hover {
     background: #3b76c4;
     transition: all 0.3s;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 20px;
+    height: 45px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 18px;
+    height: 45px;
   }
 `;
 
@@ -179,6 +250,10 @@ export const SyledAddedTestLabel = styled.span`
   display: flex;
   width: 75%;
   word-wrap: break-word;
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const StyledTrashIconBox = styled.div`

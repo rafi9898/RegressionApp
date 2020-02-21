@@ -19,4 +19,12 @@ export const StyledSearchBar = styled.input`
   color: #606060;
   outline: none;
   margin: 0 auto;
+
+  @media (max-width: 1200px) {
+    font-size: 17px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
 `;

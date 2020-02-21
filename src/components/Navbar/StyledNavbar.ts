@@ -46,17 +46,41 @@ export const StyledLogo = styled(Link)`
     text-decoration: none;
     color: #fbfbfb;
   }
+
+  @media (max-width: 1100px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 26px;
+  }
 `;
 
 export const StyledLogoutIcon = styled.img`
   width: 28px;
   cursor: pointer;
   margin-right: 12px;
+
+  @media (max-width: 1100px) {
+    width: 24px;
+  }
+
+  @media (max-width: 700px) {
+    width: 21px;
+  }
 `;
 
 export const StyledUserIcon = styled.img`
   width: 50px;
   margin-right: 12px;
+
+  @media (max-width: 1100px) {
+    width: 39px;
+  }
+
+  @media (max-width: 700px) {
+    width: 29px;
+  }
 `;
 
 export const StyledInitials = styled.span`
@@ -64,4 +88,12 @@ export const StyledInitials = styled.span`
   color: #ffffff;
   letter-spacing: 0.44px;
   font-size: 26px;
+
+  @media (max-width: 1100px) {
+    font-size: 23px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 18px;
+  }
 `;

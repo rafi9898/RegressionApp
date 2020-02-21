@@ -12,7 +12,7 @@ const InfoBox = () => {
     <StyledContainer>
       <StyledSectionTitle>You don't have any project!</StyledSectionTitle>
       <StyledSectionImg src={websiteIcon} alt="website icon" />
-      <StyledSubmitButton>Create Project</StyledSubmitButton>
+      <StyledSubmitButton to="add-project">Create Project</StyledSubmitButton>
     </StyledContainer>
   );
 };

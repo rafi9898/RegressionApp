@@ -4,6 +4,11 @@ export const StyledBox = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 160px;
+
+  @media (max-width: 700px) {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
 `;
 
 export const StyledSectionTitle = styled.h2`
@@ -14,15 +19,31 @@ export const StyledSectionTitle = styled.h2`
   font-weight: 400;
   margin-top: 8px;
   margin-bottom: 34px;
+
+  @media (max-width: 1100px) {
+    font-size: 28px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 22px;
+  }
 `;
 
 export const StyledItemForm = styled.div`
-  width: 60vw;
+  width: 80vw;
   height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
+
+  @media (max-width: 1200px) {
+    width: 80vw;
+  }
+
+  @media (max-width: 700px) {
+    width: 90vw;
+  }
 `;
 
 export const StyledItemContainer = styled.div`
@@ -45,6 +66,10 @@ export const StyledRowId = styled.div`
   background-color: #ececec;
   border: 0.30000001192092896px solid #b8b2b2;
   opacity: 1;
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const StyledRowTitle = styled.div`
@@ -70,6 +95,10 @@ export const StyledRowStatus = styled.div`
   height: 40px;
   border: 0.30000001192092896px solid #b8b2b2;
   opacity: 1;
+
+  @media (max-width: 700px) {
+    width: 24%;
+  }
 `;
 
 export const StyledLabel = styled.span`
@@ -78,6 +107,14 @@ export const StyledLabel = styled.span`
   text-align: center;
   letter-spacing: 0.33px;
   opacity: 1;
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 13px;
+  }
 `;
 
 export const StyledStatusLabel = styled.span`
@@ -87,6 +124,14 @@ export const StyledStatusLabel = styled.span`
   letter-spacing: 0.33px;
   color: #ffffff;
   opacity: 1;
+
+  @media (max-width: 1100px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 13px;
+  }
 `;
 
 export const StyledRowIcon = styled.div`
@@ -95,12 +140,24 @@ export const StyledRowIcon = styled.div`
   align-items: center;
   height: 40px;
   opacity: 1;
+
+  @media (max-width: 700px) {
+    width: 6%;
+  }
 `;
 
 export const StyledVoteIcon = styled.img`
   width: 35px;
   cursor: pointer;
   margin-left: 15px;
+
+  @media (max-width: 1100px) {
+    width: 30px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 26px;
+  }
 `;
 
 export const StyledTimeLeftContainer = styled.div`
@@ -116,6 +173,10 @@ export const StyledTimeLabel = styled.span`
   color: #141414;
   opacity: 1;
   margin-right: 20px;
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
 `;
 
 export const StyledSaveButton = styled.button`
@@ -132,6 +193,11 @@ export const StyledSaveButton = styled.button`
   outline: none;
   text-transform: uppercase;
   border: none;
+
+  @media (max-width: 700px) {
+    min-width: 43%;
+    padding: 4px 7px;
+  }
 `;
 
 export const StyledDoneButton = styled.button`
@@ -149,6 +215,15 @@ export const StyledDoneButton = styled.button`
   position: fixed;
   right: 40px;
   bottom: 20px;
+
+  @media (max-width: 1100px) {
+    width: 12%;
+  }
+
+  @media (max-width: 700px) {
+    width: 27%;
+    padding: 8px 8px;
+  }
 `;
 
 interface ProcessProps {
