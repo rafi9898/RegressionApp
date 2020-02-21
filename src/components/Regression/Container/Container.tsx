@@ -8,7 +8,7 @@ const Container = () => {
     <StyledBox>
       <SearchBar />
       <Table />
-      <StyledAddIcon>+</StyledAddIcon>
+      <StyledAddIcon to="/regression-add">+</StyledAddIcon>
     </StyledBox>
   );
 };
