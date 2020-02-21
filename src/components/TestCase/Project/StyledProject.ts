@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledContainer = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ export const StyledTableContainer = styled.div`
   text-align: center;
 `;
 
-export const StyledAddIcon = styled.span`
+export const StyledAddIcon = styled(Link)`
   width: 60px;
   height: 60px;
   box-shadow: 0px 3px 6px #00000029;
@@ -27,6 +28,12 @@ export const StyledAddIcon = styled.span`
   text-align: center;
   cursor: pointer;
   text-shadow: 0px 1px 1px #333;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: #fff;
+  }
 `;
 
 export const StyledViewIcon = styled.img`
