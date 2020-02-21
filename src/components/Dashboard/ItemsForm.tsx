@@ -35,7 +35,7 @@ const ItemsForm = () => {
           icon={projectIcon}
           titleItem="Add Project"
           color="#D95352"
-          link="/regression"
+          link="/add-project"
         />
       </StyledContainerForm>
     </StyledBoxForm>

@@ -10,6 +10,8 @@ import ProjectTestPage from "./components/pages/TestCasePage/Project/ProjectTest
 import ProcessPage from "./components/pages/RegressionPage/ProcessPage/ProcessPage";
 import AddRegressionPage from "./components/pages/RegressionPage/AddRegressionPage/AddRegressionPage";
 import AddTestCasePage from "./components/pages/TestCasePage/AddTestCasePage/AddTestCasePage";
+import EditTestCasePage from "./components/pages/TestCasePage/EditTestCasePage/EditTestCasePage";
+import AddProjectPage from "./components/pages/AddProjectPage/AddProjectPage";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/retest/:id" component={ProcessPage} />
           <Route path="/regression-add" component={AddRegressionPage} />
           <Route path="/testcase-add" component={AddTestCasePage} />
+          <Route path="/testcase-edit/:id" component={EditTestCasePage} />
+          <Route path="/add-project" component={AddProjectPage} />
         </Switch>
       </BrowserRouter>
     </div>
