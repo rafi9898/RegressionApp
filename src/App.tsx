@@ -30,6 +30,7 @@ const App = () => {
           <Route path="/testcase-add" component={AddTestCasePage} />
           <Route path="/testcase-edit/:id" component={EditTestCasePage} />
           <Route path="/add-project" component={AddProjectPage} />
+          <Route component={DashboardPage} />
         </Switch>
       </BrowserRouter>
     </div>

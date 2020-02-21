@@ -17,7 +17,7 @@ const Container = () => {
       <StyledItemForm>
         <TestCaseItem
           idTestCase="1"
-          titleTestCase="Sprwadzenie poprawności wyszukiwania"
+          titleTestCase="Sprwadzenie poprawności wyszukiwania  sadasd sad sad as"
           statusTestCase="PASS"
           colorTestCase="#4F9696"
         />

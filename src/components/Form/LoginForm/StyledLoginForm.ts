@@ -5,6 +5,11 @@ export const StyledBox = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 160px;
+
+  @media (max-width: 700px) {
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
 `;
 
 export const StyledContainer = styled.div`
@@ -14,6 +19,14 @@ export const StyledContainer = styled.div`
   opacity: 1;
   padding: 40px 40px;
   margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    width: 80vw;
+  }
+
+  @media (max-width: 700px) {
+    width: 95vw;
+  }
 `;
 
 export const StyledFlex = styled.div`
@@ -27,6 +40,10 @@ export const StyledFlex = styled.div`
 export const StyledUserIcon = styled.img`
   width: 69px;
   margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    width: 49px;
+  }
 `;
 
 export const StyledFormTitle = styled.h2`
@@ -36,6 +53,10 @@ export const StyledFormTitle = styled.h2`
   opacity: 1;
   font-weight: 400;
   margin-top: 8px;
+
+  @media (max-width: 1100px) {
+    font-size: 23px;
+  }
 `;
 
 export const StyledForm = styled.form`
@@ -43,6 +64,14 @@ export const StyledForm = styled.form`
   margin: 0 auto;
   height: 100%;
   margin-bottom: 26px;
+
+  @media (max-width: 1100px) {
+    width: 75%;
+  }
+
+  @media (max-width: 700px) {
+    width: 90%;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -86,6 +115,11 @@ export const StyledSubmitButton = styled.button`
     background: #3b76c4;
     transition: all 0.3s;
   }
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+    height: 45px;
+  }
 `;
 
 export const StyledDivider = styled.div`
@@ -106,5 +140,9 @@ export const StyledLabel = styled(Link)`
   &:hover {
     text-decoration: none;
     color: #2d2d2d;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
   }
 `;

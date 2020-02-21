@@ -11,6 +11,7 @@ import {
 } from "./StyledProcess";
 import voteUpIcon from "../../assets/Like.svg";
 import voteDownIcon from "../../assets/Dislike.svg";
+import { MobileView, BrowserView } from "react-device-detect";
 
 const TestCaseItem: React.SFC<TestCaseProps> = ({
   idTestCase,
@@ -25,7 +26,21 @@ const TestCaseItem: React.SFC<TestCaseProps> = ({
       </StyledRowId>
 
       <StyledRowTitle>
-        <StyledLabel>{titleTestCase}</StyledLabel>
+        <MobileView>
+          <StyledLabel>
+            {titleTestCase.length >= 32
+              ? titleTestCase?.slice(0, 32) + "..."
+              : titleTestCase}
+          </StyledLabel>
+        </MobileView>
+
+        <BrowserView>
+          <StyledLabel>
+            {titleTestCase.length >= 52
+              ? titleTestCase?.slice(0, 52) + "..."
+              : titleTestCase}
+          </StyledLabel>
+        </BrowserView>
       </StyledRowTitle>
 
       <StyledRowStatus colorTestCase={colorTestCase}>
@@ -44,7 +59,7 @@ export default TestCaseItem;
 
 interface TestCaseProps {
   idTestCase?: string;
-  titleTestCase?: string;
+  titleTestCase?: any;
   statusTestCase?: string;
   colorTestCase?: string;
 }

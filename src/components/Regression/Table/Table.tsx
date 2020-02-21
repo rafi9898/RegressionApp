@@ -6,6 +6,7 @@ import {
 } from "./StyledTable";
 import { Table as TableBootstrap } from "react-bootstrap";
 import viewIcon from "../../../assets/View.svg";
+import { isMobile } from "react-device-detect";
 
 class Table extends Component<TableProps> {
   render() {
@@ -24,7 +25,11 @@ class Table extends Component<TableProps> {
           <tbody>
             <tr>
               <td>05.12.2020</td>
-              <td>Testy regresyjne dla wyszukiwarki</td>
+              <td>
+                {isMobile
+                  ? "Testy regre..."
+                  : "Testy regresyjne dla wyszukiwarki"}
+              </td>
               <td>Allegro</td>
               <td style={{ backgroundColor: "#4F9696", color: "#FFF" }}>
                 Done
@@ -37,7 +42,11 @@ class Table extends Component<TableProps> {
             </tr>
             <tr>
               <td>05.12.2020</td>
-              <td>Testy regresyjne dla wyszukiwarki</td>
+              <td>
+                {isMobile
+                  ? "Testy regre..."
+                  : "Testy regresyjne dla wyszukiwarki"}
+              </td>
               <td>Allegro</td>
               <td style={{ backgroundColor: "#24240F", color: "#FFF" }}>
                 Pending
@@ -50,7 +59,11 @@ class Table extends Component<TableProps> {
             </tr>
             <tr>
               <td>05.12.2020</td>
-              <td>Testy regresyjne dla wyszukiwarki</td>
+              <td>
+                {isMobile
+                  ? "Testy regre..."
+                  : "Testy regresyjne dla wyszukiwarki"}
+              </td>
               <td>Allegro</td>
               <td style={{ backgroundColor: "#4F9696", color: "#FFF" }}>
                 Done

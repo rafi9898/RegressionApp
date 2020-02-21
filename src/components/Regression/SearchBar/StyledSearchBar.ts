@@ -7,6 +7,14 @@ export const StyledSearchBarContainer = styled.div`
   justify-content: center;
   margin-bottom: 30px;
   margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    width: 80%;
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export const StyledSearchBar = styled.input`
@@ -19,4 +27,12 @@ export const StyledSearchBar = styled.input`
   color: #606060;
   outline: none;
   margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    font-size: 17px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
 `;

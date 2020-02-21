@@ -10,6 +10,10 @@ export const StyledTableContainer = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
+
+  @media (max-width: 700px) {
+    font-size: 12px;
+  }
 `;
 
 export const StyledAddIcon = styled(Link)`
@@ -34,6 +38,19 @@ export const StyledAddIcon = styled(Link)`
     text-decoration: none;
     color: #fff;
   }
+
+  @media (max-width: 1100px) {
+    width: 50px;
+    height: 50px;
+    font-size: 33px;
+  }
+
+  @media (max-width: 700px) {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    right: 20px;
+  }
 `;
 
 export const StyledActionLink = styled(Link)`
@@ -48,6 +65,14 @@ export const StyledViewIcon = styled.img`
 export const StyledTrashIcon = styled.img`
   width: 45px;
   margin-right: 14px;
+
+  @media (max-width: 1100px) {
+    width: 36px;
+  }
+
+  @media (max-width: 700px) {
+    width: 30px;
+  }
 `;
 
 export const StyledLabel = styled.span`
@@ -56,6 +81,14 @@ export const StyledLabel = styled.span`
   color: #1c1c1c;
   opacity: 1;
   font-weight: 400;
+
+  @media (max-width: 1100px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 15px;
+  }
 `;
 
 export const StyledDelteContainer = styled.div`
@@ -65,4 +98,8 @@ export const StyledDelteContainer = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
+
+  @media (max-width: 700px) {
+    left: 20px;
+  }
 `;

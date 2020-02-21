@@ -29,7 +29,7 @@ const ItemsForm = () => {
           icon={historyIcon}
           titleItem="History"
           color="#D9A14F"
-          link="/regression"
+          link="/dashboard"
         />
         <Item
           icon={projectIcon}
