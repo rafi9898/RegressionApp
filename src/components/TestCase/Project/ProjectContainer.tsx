@@ -74,7 +74,7 @@ const ProjectContainer = () => {
         </TableBootstrap>
       </StyledTableContainer>
 
-      <StyledAddIcon>+</StyledAddIcon>
+      <StyledAddIcon to="/testcase-add">+</StyledAddIcon>
 
       <StyledDelteContainer>
         <StyledTrashIcon src={trashIcon} alt="Trash icon" />

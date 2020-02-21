@@ -135,3 +135,36 @@ export const StyledSubmitButton = styled.button`
     transition: all 0.3s;
   }
 `;
+
+export const StyledItemBox = styled.div`
+  width: 100%;
+  padding: 6px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+export const StyledAddedTest = styled.span`
+  width: 100%;
+  padding: 9px 7px 9px 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #ddd;
+  display: flex;
+`;
+
+export const SyledAddedTestLabel = styled.span`
+  font-size: 16px;
+  display: flex;
+  width: 75%;
+  word-wrap: break-word;
+`;
+
+export const StyledTrashIconBox = styled.div`
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #ddd;
+`;
