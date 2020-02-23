@@ -33,6 +33,14 @@ export const StyledUserItemContainer = styled.div`
   align-items: center;
 `;
 
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 export const StyledLogo = styled(Link)`
   color: #fbfbfb;
   font-size: 44px;

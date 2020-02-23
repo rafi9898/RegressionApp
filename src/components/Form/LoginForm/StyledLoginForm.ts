@@ -128,6 +128,20 @@ export const StyledDivider = styled.div`
   padding: 10px 0px;
 `;
 
+export const StyledErrorLabel = styled.span`
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 0.35px;
+  color: crimson;
+  opacity: 1;
+  cursor: pointer;
+  text-decoration: none;
+
+  @media (max-width: 1100px) {
+    font-size: 16px;
+  }
+`;
+
 export const StyledLabel = styled(Link)`
   font-size: 19px;
   text-align: center;
