@@ -14,12 +14,14 @@ import userIcon from "../../assets/User.svg";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
 
-const Navbar: React.SFC<NavbarProps> = ({ signOut, auth }) => {
+const Navbar: React.SFC<NavbarProps> = ({ signOut, auth, profile }) => {
   const links = auth.uid ? (
     <StyledUserItemContainer>
       <StyledLogoutIcon onClick={signOut} src={logoutIcon} alt="Logout icon" />
       <StyledUserIcon src={userIcon} alt="User icon" />
-      <StyledInitials>RP</StyledInitials>
+      <StyledInitials>
+        {profile.initials ? profile.initials : null}
+      </StyledInitials>
     </StyledUserItemContainer>
   ) : null;
 
@@ -38,7 +40,8 @@ const Navbar: React.SFC<NavbarProps> = ({ signOut, auth }) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 
@@ -53,4 +56,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 interface NavbarProps {
   signOut?: any;
   auth?: any;
+  profile?: any;
 }

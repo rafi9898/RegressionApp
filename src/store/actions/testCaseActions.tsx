@@ -1,14 +1,16 @@
 export const createTestGroup = (testGroup: any) => {
   return (dispatch: any, getState: any, { getFirebase, getFirestore }: any) => {
     const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
     firestore
       .collection("testGroups")
       .add({
         groupName: testGroup.testGroupName,
         testCases: testGroup.testCaseList,
-        authorFirstName: "Rafał",
-        authorLastName: "Podraza",
-        authorId: 12345,
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
+        authorId: authorId,
         createdAt: new Date()
       })
       .then(() => {
