@@ -7,15 +7,19 @@ import {
 } from "./StyledContent";
 import projectIcon from "../../../assets/ProjectTestCase.svg";
 
-export class ProjectItem extends Component<ProjectItemProps> {
+export class ProjectItem extends Component<any, ProjectItemProps> {
   render() {
-    const { itemTitle, desc, link } = this.props;
+    const { idItem, link, projectName, projectDesc } = this.props;
 
     return (
-      <StyledItemContainer to={link}>
+      <StyledItemContainer key={idItem} to={link}>
         <StyledProjectIcon src={projectIcon} alt="project icon" />
-        <StyledItemTitle>{itemTitle}</StyledItemTitle>
-        <StyledItemDesc>{desc}</StyledItemDesc>
+        <StyledItemTitle>{projectName}</StyledItemTitle>
+        <StyledItemDesc>
+          {projectDesc.length <= 120
+            ? projectDesc
+            : projectDesc.slice(0, 120) + "..."}
+        </StyledItemDesc>
       </StyledItemContainer>
     );
   }
@@ -24,7 +28,9 @@ export class ProjectItem extends Component<ProjectItemProps> {
 export default ProjectItem;
 
 interface ProjectItemProps {
-  itemTitle?: string;
-  desc?: string;
+  projectData?: any;
   link?: string;
+  projectName?: string;
+  projectDesc?: any;
+  idItem?: string;
 }
