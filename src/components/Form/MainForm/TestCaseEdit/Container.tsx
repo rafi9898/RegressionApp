@@ -11,20 +11,38 @@ import {
 } from "../StyledForm";
 import Loader from "../../../Loader/Loader";
 import TestCaseItem from "./TestCaseItem";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
-class Container extends Component<{}, ContainerProps> {
+class Container extends Component<any, ContainerProps> {
   state = {
-    testCaseList: ["1", "2", "3", "4"],
+    testCaseList: [],
     testCaseValue: "",
-    testCaseGroupName: "Jakas grupa"
+    testCaseGroupName: ""
   };
+
+  componentWillReceiveProps(prop: any) {
+    this.setState({
+      testCaseGroupName: prop.testGroup.groupName,
+      testCaseList: prop.testGroup.testCases
+    });
+  }
+
+  componentDidMount() {
+    if (this.props.testGroup && this.props.testGroup) {
+      this.setState({
+        testCaseGroupName: this.props.testGroup.groupName,
+        testCaseList: this.props.testGroup.testCases
+      });
+    }
+  }
 
   render() {
     const deleteTestCase = (id: any) => {
       let currentTestCaseList: any[] = this.state.testCaseList;
-      const index = currentTestCaseList.indexOf(id);
-      if (index > -1) {
-        currentTestCaseList.splice(index, 1);
+      if (id >= 0 && id <= currentTestCaseList.length) {
+        currentTestCaseList.splice(id, 1);
         this.setState({
           testCaseList: currentTestCaseList
         });
@@ -59,12 +77,12 @@ class Container extends Component<{}, ContainerProps> {
 
     const showTestCaseList =
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      this.state.testCaseList ? (
-        this.state.testCaseList.map((testCase, index) => {
+      this.state.testCaseList && this.state.testCaseList ? (
+        this.state.testCaseList.map((testCase: any, index: number) => {
           return (
             <TestCaseItem
               deleteEvent={deleteTestCase}
-              testId={testCase}
+              testId={index}
               key={index}
               testCaseName={testCase}
             />
@@ -117,7 +135,20 @@ class Container extends Component<{}, ContainerProps> {
   }
 }
 
-export default Container;
+const mapStateToProps = (state: any, ownProps: any) => {
+  const id = ownProps.pageId;
+  const testGroups =
+    state.firestore.data.testGroups && state.firestore.data.testGroups;
+  const testGroup = testGroups && testGroups ? testGroups[id] : null;
+  return {
+    testGroup: testGroup
+  };
+};
+
+export default compose<any>(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "testGroups" }])
+)(Container);
 
 interface ContainerProps {
   testCaseList?: any;

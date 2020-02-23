@@ -11,9 +11,12 @@ import {
 } from "../StyledForm";
 import Loader from "../../../Loader/Loader";
 import TestCaseItem from "./TestCaseItem";
+import { connect } from "react-redux";
+import { createTestGroup } from "../../../../store/actions/testCaseActions";
 
-class Container extends Component<{}, ContainerProps> {
+class Container extends Component<any, ContainerProps> {
   state = {
+    testGroupName: "",
     testCaseList: [],
     testCaseValue: ""
   };
@@ -28,6 +31,13 @@ class Container extends Component<{}, ContainerProps> {
           testCaseList: currentTestCaseList
         });
       }
+    };
+
+    const setGroupName = (e: any) => {
+      let currentGroupName = e.target.value;
+      this.setState({
+        testGroupName: currentGroupName
+      });
     };
 
     const addNewTestCase = (e: any) => {
@@ -66,18 +76,26 @@ class Container extends Component<{}, ContainerProps> {
         <Loader />
       );
 
+    const createNewTestGroup = (e: any) => {
+      e.preventDefault();
+      if (this.state.testGroupName && this.state.testCaseList.length >= 1) {
+        this.props.createTestGroup(this.state);
+      }
+    };
+
     return (
       <StyledBox>
         <StyledContainer>
           <StyledFlex>
             <StyledFormTitle>Add Group</StyledFormTitle>
-            <StyledForm>
+            <StyledForm onSubmit={createNewTestGroup}>
               <StyledInput
                 type="text"
                 required
                 id="groupName"
                 name="groupName"
                 placeholder="Group name"
+                onChange={setGroupName}
               />
 
               <StyledInput
@@ -98,7 +116,9 @@ class Container extends Component<{}, ContainerProps> {
                 )}
               </StyledItemBox>
 
-              <StyledSubmitButton>Create Group</StyledSubmitButton>
+              <StyledSubmitButton onClick={createNewTestGroup}>
+                Create Group
+              </StyledSubmitButton>
             </StyledForm>
           </StyledFlex>
         </StyledContainer>
@@ -107,10 +127,19 @@ class Container extends Component<{}, ContainerProps> {
   }
 }
 
-export default Container;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    createTestGroup: (testGroup: any) => {
+      dispatch(createTestGroup(testGroup));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Container);
 
 interface ContainerProps {
   testCaseList?: any;
   testCaseValue?: string;
   deleteEvent?: any;
+  testGroupName?: string;
 }
