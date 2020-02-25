@@ -14,31 +14,31 @@ import TestCaseItem from "./TestCaseItem";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { updateTestGroup } from "../../../../store/actions/testCaseActions";
 
 class Container extends Component<any, ContainerProps> {
   state = {
     testCaseList: [],
     testCaseValue: "",
-    testCaseGroupName: ""
+    testCaseGroupName: "",
+    projectId: "",
+    testItemId: ""
   };
 
   componentWillReceiveProps(prop: any) {
-    this.setState({
-      testCaseGroupName: prop.testGroup.groupName,
-      testCaseList: prop.testGroup.testCases
-    });
-  }
-
-  componentDidMount() {
-    if (this.props.testGroup && this.props.testGroup) {
+    if (prop.testGroup.groupName) {
       this.setState({
-        testCaseGroupName: this.props.testGroup.groupName,
-        testCaseList: this.props.testGroup.testCases
+        testCaseGroupName: prop.testGroup.groupName,
+        testCaseList: prop.testGroup.testCases,
+        projectId: prop.projectId,
+        testItemId: prop.pageId
       });
     }
   }
 
   render() {
+    const { updateTestGroup } = this.props;
+
     const deleteTestCase = (id: any) => {
       let currentTestCaseList: any[] = this.state.testCaseList;
       if (id >= 0 && id <= currentTestCaseList.length) {
@@ -50,7 +50,7 @@ class Container extends Component<any, ContainerProps> {
     };
 
     const setTestCaseGroupName = (e: any) => {
-      let newTestCaseGroupName = e.target.value;
+      const newTestCaseGroupName = e.target.value;
       this.setState({
         testCaseGroupName: newTestCaseGroupName
       });
@@ -92,12 +92,24 @@ class Container extends Component<any, ContainerProps> {
         <Loader />
       );
 
+    const updateNewTestGroup = (e: any) => {
+      e.preventDefault();
+      if (
+        this.state.testCaseGroupName &&
+        this.state.testCaseList &&
+        this.state.testItemId &&
+        this.state.projectId
+      ) {
+        updateTestGroup(this.state);
+      }
+    };
+
     return (
       <StyledBox>
         <StyledContainer>
           <StyledFlex>
             <StyledFormTitle>Edit Group</StyledFormTitle>
-            <StyledForm>
+            <StyledForm onSubmit={updateNewTestGroup}>
               <StyledInput
                 type="text"
                 required
@@ -119,7 +131,8 @@ class Container extends Component<any, ContainerProps> {
               />
 
               <StyledItemBox>
-                {this.state.testCaseList.length > 0 ? (
+                {this.state.testCaseList &&
+                this.state.testCaseList.length > 0 ? (
                   showTestCaseList
                 ) : (
                   <Loader />
@@ -136,18 +149,38 @@ class Container extends Component<any, ContainerProps> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  const id = ownProps.pageId;
-  const testGroups =
+  const testGroup =
     state.firestore.data.testGroups && state.firestore.data.testGroups;
-  const testGroup = testGroups && testGroups ? testGroups[id] : null;
   return {
     testGroup: testGroup
   };
 };
 
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    updateTestGroup: (testGroup: any) => {
+      dispatch(updateTestGroup(testGroup));
+    }
+  };
+};
+
 export default compose<any>(
-  connect(mapStateToProps),
-  firestoreConnect([{ collection: "testGroups" }])
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect((props: any) => {
+    return [
+      {
+        collection: "testGroups",
+        doc: props.projectId && props.projectId ? props.projectId : "null",
+        subcollections: [
+          {
+            collection: "testItems",
+            doc: props.pageId && props.pageId ? props.pageId : "null"
+          }
+        ],
+        storeAs: `testGroups`
+      }
+    ];
+  })
 )(Container);
 
 interface ContainerProps {
@@ -155,4 +188,6 @@ interface ContainerProps {
   testCaseValue?: string;
   deleteEvent?: any;
   testCaseGroupName?: string;
+  projectId?: string;
+  testItemId?: string;
 }

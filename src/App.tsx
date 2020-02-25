@@ -27,8 +27,11 @@ const App = () => {
           <Route path="/testcase/:id" component={ProjectTestPage} />
           <Route path="/retest/:id" component={ProcessPage} />
           <Route path="/regression-add" component={AddRegressionPage} />
-          <Route path="/testcase-add" component={AddTestCasePage} />
-          <Route path="/testcase-edit/:id" component={EditTestCasePage} />
+          <Route path="/testcase-add/:id" component={AddTestCasePage} />
+          <Route
+            path="/testcase-edit/:projectId/:id"
+            component={EditTestCasePage}
+          />
           <Route path="/add-project" component={AddProjectPage} />
           <Route component={DashboardPage} />
         </Switch>
