@@ -18,8 +18,23 @@ class Container extends Component<any, ContainerProps> {
   state = {
     testGroupName: "",
     testCaseList: [],
-    testCaseValue: ""
+    testCaseValue: "",
+    projectId: ""
   };
+
+  componentDidMount() {
+    const projectId = this.props.match.params.id && this.props.match.params.id;
+    this.setState({
+      projectId: projectId
+    });
+  }
+
+  componentWillReceiveProps(ownProps: any) {
+    const projectId = ownProps.match.paramas.id && ownProps.match.paramas.id;
+    this.setState({
+      projectId: projectId
+    });
+  }
 
   render() {
     const deleteTestCase = (id: any) => {
@@ -142,4 +157,5 @@ interface ContainerProps {
   testCaseValue?: string;
   deleteEvent?: any;
   testGroupName?: string;
+  projectId?: string;
 }

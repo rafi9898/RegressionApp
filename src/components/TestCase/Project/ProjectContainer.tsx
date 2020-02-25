@@ -19,11 +19,10 @@ import { compose } from "redux";
 
 class ProjectContainer extends Component<ProjectProps> {
   render() {
-    const { testCases } = this.props;
-
+    const { testCases, match } = this.props;
     const renderTestCaseList =
       testCases && testCases
-        ? testCases.map((testCase: any) => {
+        ? testCases.reverse().map((testCase: any) => {
             return (
               <tbody key={testCase.id}>
                 <tr>
@@ -36,7 +35,7 @@ class ProjectContainer extends Component<ProjectProps> {
                   <td>
                     <StyledActionLink
                       id={testCase.id}
-                      to={`/testcase-edit/${testCase.id}`}
+                      to={`/testcase-edit/${match.params.id}/${testCase.id}`}
                     >
                       <StyledViewIcon src={editIcon} alt="Edit icon" />
                     </StyledActionLink>
@@ -75,7 +74,7 @@ class ProjectContainer extends Component<ProjectProps> {
           </TableBootstrap>
         </StyledTableContainer>
 
-        <StyledAddIcon to="/testcase-add">+</StyledAddIcon>
+        <StyledAddIcon to={`/testcase-add/${match.params.id}`}>+</StyledAddIcon>
 
         <StyledDelteContainer>
           <StyledTrashIcon src={trashIcon} alt="Trash icon" />
@@ -94,11 +93,22 @@ const mapStateToProps = (state: any) => {
 
 export default compose<any>(
   connect(mapStateToProps),
-  firestoreConnect([
-    { collection: "testGroups", orderBy: [["createdAt", "desc"]] }
-  ])
+  firestoreConnect((props: any) => {
+    return [
+      {
+        collection: "testGroups",
+        doc:
+          props.match.params.id && props.match.params.id
+            ? props.match.params.id
+            : "null",
+        subcollections: [{ collection: "testItems", orderBy: "createdAt" }],
+        storeAs: `testGroups`
+      }
+    ];
+  })
 )(ProjectContainer);
 
 interface ProjectProps {
   testCases?: any;
+  match?: any;
 }

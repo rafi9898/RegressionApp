@@ -4,11 +4,11 @@ import ProjectContainer from "../../../TestCase/Project/ProjectContainer";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-const ProjectTestPage: React.SFC<ProjectTestProps> = ({ auth }) => {
+const ProjectTestPage: React.SFC<ProjectTestProps> = ({ auth, match }) => {
   if (!auth.uid) return <Redirect to="/" />;
   return (
     <StyledContainer>
-      <ProjectContainer />
+      <ProjectContainer match={match} />
     </StyledContainer>
   );
 };
@@ -23,4 +23,5 @@ export default connect(mapStateToProps)(ProjectTestPage);
 
 interface ProjectTestProps {
   auth?: any;
+  match?: any;
 }

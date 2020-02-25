@@ -8,7 +8,10 @@ const EditTestCasePage = (props: any) => {
   if (!props.auth.uid) return <Redirect to="/" />;
   return (
     <StyledContainer>
-      <Container pageId={props.match.params.id} />
+      <Container
+        pageId={props.match.params.id}
+        projectId={props.match.params.projectId}
+      />
     </StyledContainer>
   );
 };

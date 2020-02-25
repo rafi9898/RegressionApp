@@ -21,11 +21,16 @@ const initState = {
 const testCaseReducer = (state = initState, action: any) => {
   switch (action.type) {
     case "CREATE_TEST_GROUP":
-      console.log("created test group", action.testGroup);
-      window.location.href = "/testcase/1";
+      window.location.href = `/testcase/${action.testGroup.projectId}`;
       return state;
     case "CREATE_GROUP_ERROR":
       console.log("Create group error", action.err);
+      return state;
+    case "UPDATED_TEST_GROUP":
+      window.location.href = `/testcase/${action.testGroup.projectId}`;
+      return state;
+    case "UPDATE_GROUP_ERROR":
+      console.log("Update group error", action.err);
       return state;
     default:
       return state;
