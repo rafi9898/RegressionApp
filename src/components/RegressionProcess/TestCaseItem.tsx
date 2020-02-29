@@ -17,8 +17,17 @@ const TestCaseItem: React.SFC<TestCaseProps> = ({
   idTestCase,
   titleTestCase,
   statusTestCase,
-  colorTestCase
+  colorTestCase,
+  setNewStatusAction
 }) => {
+  const setPassStatus = (id: number) => {
+    setNewStatusAction(id, 1);
+  };
+
+  const setFailStatus = (id: number) => {
+    setNewStatusAction(id, 2);
+  };
+
   return (
     <StyledItemContainer>
       <StyledRowId>
@@ -48,8 +57,16 @@ const TestCaseItem: React.SFC<TestCaseProps> = ({
       </StyledRowStatus>
 
       <StyledRowIcon>
-        <StyledVoteIcon src={voteUpIcon} alt="Vote Up Icon" />
-        <StyledVoteIcon src={voteDownIcon} alt="Vote Down Icon" />
+        <StyledVoteIcon
+          onClick={() => setPassStatus(idTestCase)}
+          src={voteUpIcon}
+          alt="Vote Up Icon"
+        />
+        <StyledVoteIcon
+          onClick={() => setFailStatus(idTestCase)}
+          src={voteDownIcon}
+          alt="Vote Down Icon"
+        />
       </StyledRowIcon>
     </StyledItemContainer>
   );
@@ -58,8 +75,10 @@ const TestCaseItem: React.SFC<TestCaseProps> = ({
 export default TestCaseItem;
 
 interface TestCaseProps {
-  idTestCase?: string;
+  idTestCase?: any;
   titleTestCase?: any;
   statusTestCase?: string;
   colorTestCase?: string;
+  setPassStatus?: any;
+  setNewStatusAction?: any;
 }

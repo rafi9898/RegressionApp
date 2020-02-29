@@ -9,53 +9,71 @@ import {
   StyledSubmitButton,
   StyledSelect,
   StyledOption,
-  StyledCheckboxItem,
-  StyledLabelCheckbox,
-  StyledCheckboxContainer,
-  StyledCheckboxItemContainer
+  StyledCheckboxContainer
 } from "../StyledForm";
 import Loader from "../../../Loader/Loader";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import TestCasesItem from "./TestCasesItem";
+import { createRegression } from "../../../../store/actions/regressionActions";
 
 class Container extends Component<ContainerProps> {
   state = {
     regressionTitle: "",
     regressionProject: "",
+    regressionProjectName: "",
     choosedTestCases: [],
+    statusChoosedTestCases: [],
     validation: true,
-    allTestCases: [
-      "Test1",
-      "Test2",
-      "Test3",
-      "Test4",
-      "Test5",
-      "Test6",
-      "Test7",
-      "Test8",
-      "Test9"
-    ]
+    allTestCases: null
   };
 
   render() {
+    const { projects, createNewRegression }: any = this.props;
+
     const setRegressionData = (e: any) => {
+      if (e.target.id === "regressionProject") {
+        this.setState({
+          regressionProject: e.target.id,
+          choosedTestCases: [],
+          statusChoosedTestCases: [],
+          allTestCases: null
+        });
+      }
       this.setState({
         [e.target.id]: e.target.value
       });
     };
 
-    const setRegressionTestCases = (e: any) => {
-      let currentTestCaseList: string[] = this.state.choosedTestCases;
-      const testId = e.target.id;
+    const setRegressionTestCases = (e: any, testList: any) => {
+      let currentTestCaseList: any = this.state.choosedTestCases;
+
       if (e.target.checked) {
-        currentTestCaseList.push(testId);
+        let currentStatusTestCaseList: number[] = [];
+        currentTestCaseList.push(testList);
+        const listCases = [].concat.apply([], currentTestCaseList);
+        for (let i = 0; i < listCases.length; i++) {
+          currentStatusTestCaseList.push(0);
+        }
         this.setState({
-          choosedTestCases: currentTestCaseList
+          choosedTestCases: currentTestCaseList,
+          statusChoosedTestCases: currentStatusTestCaseList,
+          allTestCases: listCases
         });
       } else {
-        const index = currentTestCaseList.indexOf(testId);
+        const index = currentTestCaseList.indexOf(testList);
         if (index > -1) {
+          let currentStatusTestCaseList: number[] = [];
           currentTestCaseList.splice(index, 1);
+          const listCases = [].concat.apply([], currentTestCaseList);
+          for (let i = 0; i < listCases.length; i++) {
+            currentStatusTestCaseList.push(0);
+          }
           this.setState({
-            choosedTestCases: currentTestCaseList
+            choosedTestCases: currentTestCaseList,
+            statusChoosedTestCases: currentStatusTestCaseList,
+            allTestCases: listCases
           });
         }
       }
@@ -63,36 +81,32 @@ class Container extends Component<ContainerProps> {
 
     const addNewRegression = (e: any) => {
       e.preventDefault();
-      this.state.regressionTitle &&
-      this.state.regressionProject &&
-      this.state.choosedTestCases.length
-        ? console.log(this.state.choosedTestCases)
-        : this.setState({
-            validation: false
-          });
+      if (
+        this.state.regressionTitle &&
+        this.state.regressionProject &&
+        this.state.statusChoosedTestCases &&
+        this.state.regressionProjectName &&
+        this.state.allTestCases &&
+        this.state.choosedTestCases.length
+      ) {
+        createNewRegression(this.state);
+      } else {
+        this.setState({
+          validation: false
+        });
+      }
     };
 
-    const renderTestCases = this.state.allTestCases ? (
-      this.state.allTestCases.map((testCase, id) => {
-        return (
-          <StyledCheckboxItemContainer key={id}>
-            <StyledCheckboxItem
-              type="checkbox"
-              id={testCase}
-              value={testCase}
-              name={testCase}
-              onChange={setRegressionTestCases}
-              defaultChecked={false}
-            />
-            <StyledLabelCheckbox htmlFor={testCase} {...this.props}>
-              {testCase}
-            </StyledLabelCheckbox>
-          </StyledCheckboxItemContainer>
-        );
-      })
-    ) : (
-      <StyledLabelCheckbox>No test cases found</StyledLabelCheckbox>
-    );
+    const renderProjectOptions =
+      projects && projects
+        ? projects.map((project: any) => {
+            return (
+              <StyledOption key={project.id} value={project.id}>
+                {project.projectName}
+              </StyledOption>
+            );
+          })
+        : null;
 
     return (
       <StyledBox>
@@ -108,6 +122,15 @@ class Container extends Component<ContainerProps> {
                 placeholder="Regression name / ID"
                 onChange={setRegressionData}
               />
+
+              <StyledInput
+                type="text"
+                required
+                id="regressionProjectName"
+                placeholder="Project name"
+                onChange={setRegressionData}
+              />
+
               <StyledSelect
                 defaultValue={"DEFAULT"}
                 id="regressionProject"
@@ -122,13 +145,18 @@ class Container extends Component<ContainerProps> {
                 <StyledOption value="DEFAULT" disabled>
                   Select your project
                 </StyledOption>
-                <StyledOption value="Allegro1">Allegro</StyledOption>
-                <StyledOption value="Allegro2">Allegro</StyledOption>
-                <StyledOption value="Allegro3">Allegro</StyledOption>
+                {renderProjectOptions && renderProjectOptions ? (
+                  renderProjectOptions
+                ) : (
+                  <Loader />
+                )}
               </StyledSelect>
 
               <StyledCheckboxContainer>
-                {renderTestCases ? renderTestCases : <Loader />}
+                <TestCasesItem
+                  projectId={this.state.regressionProject}
+                  setTestCaseAction={setRegressionTestCases}
+                />
               </StyledCheckboxContainer>
 
               <StyledSubmitButton>Add Regression</StyledSubmitButton>
@@ -140,7 +168,37 @@ class Container extends Component<ContainerProps> {
   }
 }
 
-export default Container;
+const mapStateToProps = (state: any) => {
+  return {
+    projects: state.firestore.ordered.projects,
+    auth: state.firebase.auth,
+    testGroups: state.firestore.ordered.testGroups
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    createNewRegression: (regression: any) =>
+      dispatch(createRegression(regression))
+  };
+};
+
+export default compose<any>(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect((props: any) => {
+    return [
+      {
+        collection: "projects",
+        doc: props.auth.uid && props.auth.uid ? props.auth.uid : "null",
+        subcollections: [{ collection: "projectItems", orderBy: "createdAt" }],
+        storeAs: `projects`
+      },
+      {
+        collection: "testGroups"
+      }
+    ];
+  })
+)(Container);
 
 interface ContainerProps {
   regressionTitle?: string;
@@ -148,5 +206,10 @@ interface ContainerProps {
   choosedTestCases?: any;
   validation?: boolean;
   htmlFor?: string;
-  allTestCases?: Array<"">;
+  allTestCases?: any;
+  projects?: any;
+  regressionProjectOptions?: any;
+  testCases?: any;
+  regressionProjectName?: string;
+  onSelect?: any;
 }

@@ -4,11 +4,11 @@ import Container from "../../../RegressionProcess/Container";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-const ProcessPage: React.SFC<ProcessProps> = ({ auth }) => {
+const ProcessPage: React.SFC<ProcessProps> = ({ auth, match }) => {
   if (!auth.uid) return <Redirect to="/" />;
   return (
     <StyledContainer>
-      <Container />
+      <Container match={match} />
     </StyledContainer>
   );
 };
@@ -23,4 +23,5 @@ export default connect(mapStateToProps)(ProcessPage);
 
 interface ProcessProps {
   auth?: any;
+  match?: any;
 }

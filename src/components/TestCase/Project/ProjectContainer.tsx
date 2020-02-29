@@ -16,10 +16,45 @@ import editIcon from "../../../assets/EditCase.svg";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import {
+  deleteTestGroup,
+  deleteTestGroupCollection
+} from "../../../store/actions/testCaseActions";
+import { deleteProject } from "../../../store/actions/projectActions";
 
-class ProjectContainer extends Component<ProjectProps> {
+class ProjectContainer extends Component<any, ProjectProps> {
   render() {
-    const { testCases, match } = this.props;
+    const {
+      testCases,
+      match,
+      deleteTestGroup,
+      deleteProject,
+      auth
+    } = this.props;
+
+    const deleteTestGroupAction = (groupId: string) => {
+      let data = {
+        idTestGroup: "",
+        idItem: ""
+      };
+
+      if (groupId && match.params.id) {
+        data.idTestGroup = match.params.id && match.params.id;
+        data.idItem = groupId;
+        deleteTestGroup(data);
+      }
+    };
+
+    const deleteProjectAction = () => {
+      const state = {
+        projectId: match.params.id && match.params.id,
+        authorId: auth.uid
+      };
+      if (state.projectId && state.authorId) {
+        deleteProject(state);
+      }
+    };
+
     const renderTestCaseList =
       testCases && testCases
         ? testCases.reverse().map((testCase: any) => {
@@ -46,6 +81,7 @@ class ProjectContainer extends Component<ProjectProps> {
                       style={{ width: "29px" }}
                       src={trashIcon}
                       alt="Delete icon"
+                      onClick={() => deleteTestGroupAction(testCase.id)}
                     />
                   </td>
                 </tr>
@@ -76,7 +112,7 @@ class ProjectContainer extends Component<ProjectProps> {
 
         <StyledAddIcon to={`/testcase-add/${match.params.id}`}>+</StyledAddIcon>
 
-        <StyledDelteContainer>
+        <StyledDelteContainer onClick={deleteProjectAction}>
           <StyledTrashIcon src={trashIcon} alt="Trash icon" />
           <StyledLabel>Delete Project</StyledLabel>
         </StyledDelteContainer>
@@ -87,12 +123,27 @@ class ProjectContainer extends Component<ProjectProps> {
 
 const mapStateToProps = (state: any) => {
   return {
-    testCases: state.firestore.ordered.testGroups
+    testCases: state.firestore.ordered.testGroups,
+    auth: state.firebase.auth
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    deleteTestGroup: (testGroup: any) => {
+      dispatch(deleteTestGroup(testGroup));
+    },
+    deleteProject: (project: any) => {
+      dispatch(deleteProject(project));
+    },
+    deleteTestGroupCollection: (testGroup: any) => {
+      dispatch(deleteTestGroupCollection(testGroup));
+    }
   };
 };
 
 export default compose<any>(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect((props: any) => {
     return [
       {
@@ -111,4 +162,7 @@ export default compose<any>(
 interface ProjectProps {
   testCases?: any;
   match?: any;
+  deleteTestGroup?: any;
+  deleteProject?: any;
+  auth?: any;
 }

@@ -32,6 +32,16 @@ const testCaseReducer = (state = initState, action: any) => {
     case "UPDATE_GROUP_ERROR":
       console.log("Update group error", action.err);
       return state;
+    case "DELETED_TEST_GROUP":
+      return state;
+    case "DELETE_GROUP_ERROR":
+      console.log("Delete group error", action.err);
+      return state;
+    case "DELETED_TEST_GROUP_COLLECTION":
+      return state;
+    case "DELETE_GROUP_COLLECTION_ERROR":
+      console.log("Delete project error", action.err);
+      return state;
     default:
       return state;
   }
