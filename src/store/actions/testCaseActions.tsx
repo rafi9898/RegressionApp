@@ -47,3 +47,40 @@ export const updateTestGroup = (testGroup: any) => {
       });
   };
 };
+
+export const deleteTestGroup = (testGroup: any) => {
+  return (dispatch: any, getState: any, { getFirebase, getFirestore }: any) => {
+    const firestore = getFirestore();
+    const projectId = testGroup.idTestGroup;
+    const testItemId = testGroup.idItem;
+    firestore
+      .collection("testGroups")
+      .doc(projectId)
+      .collection("testItems")
+      .doc(testItemId)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETED_TEST_GROUP", testGroup });
+      })
+      .catch((err: any) => {
+        dispatch({ type: "DELETE_GROUP_ERROR", err });
+      });
+  };
+};
+
+export const deleteTestGroupCollection = (testGroup: any) => {
+  return (dispatch: any, getState: any, { getFirebase, getFirestore }: any) => {
+    const firestore = getFirestore();
+    const projectId = testGroup.projectId;
+    firestore
+      .collection("testGroups")
+      .doc(projectId)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETED_TEST_GROUP_COLLECTION", testGroup });
+      })
+      .catch((err: any) => {
+        dispatch({ type: "DELETE_GROUP_COLLECTION_ERROR", err });
+      });
+  };
+};

@@ -4,6 +4,7 @@ export const StyledBox = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 160px;
+  text-align: center;
 
   @media (max-width: 700px) {
     padding-top: 100px;
@@ -11,14 +12,14 @@ export const StyledBox = styled.div`
   }
 `;
 
-export const StyledSectionTitle = styled.h2`
+export const StyledSectionTitle = styled.span`
   font-size: 33px;
   text-align: center;
   color: #606060;
   opacity: 1;
   font-weight: 400;
   margin-top: 8px;
-  margin-bottom: 34px;
+  margin-bottom: 54px;
 
   @media (max-width: 1100px) {
     font-size: 28px;
