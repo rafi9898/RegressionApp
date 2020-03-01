@@ -163,6 +163,7 @@ export const StyledVoteIcon = styled.img`
 
 export const StyledTimeLeftContainer = styled.div`
   position: fixed;
+  width: 24%;
   left: 40px;
   bottom: 20px;
   display: flex;
@@ -171,6 +172,7 @@ export const StyledTimeLeftContainer = styled.div`
 
 export const StyledTimeLabel = styled.span`
   font-size: 22px;
+  display: flex;
   color: #141414;
   opacity: 1;
   margin-right: 20px;

@@ -39,7 +39,7 @@ class Table extends Component<TableProps> {
 
     const renderRegressionList =
       regression &&
-      regression.map((item: any) => {
+      regression.reverse().map((item: any) => {
         return (
           <tr key={item.id}>
             <td>{moment(item.createdAt.toDate()).calendar()}</td>
