@@ -15,6 +15,7 @@ import { compose } from "redux";
 import Loader from "../Loader/Loader";
 import { updateRegression } from "../../store/actions/regressionActions";
 import { Redirect } from "react-router-dom";
+import Timer from "react-compound-timer";
 
 class Container extends Component<any, ContainerProps> {
   state = {
@@ -22,7 +23,10 @@ class Container extends Component<any, ContainerProps> {
     projectTitle: "",
     testCases: [],
     statusTestCases: [],
-    unauthorized: false
+    unauthorized: false,
+    initialTime: 0,
+    pauseTime: false,
+    currentTimer: 0
   };
 
   componentWillReceiveProps(ownProps: any) {
@@ -32,7 +36,8 @@ class Container extends Component<any, ContainerProps> {
           regressionId: item.id,
           projectTitle: item.regressionProjectName,
           testCases: item.choosedTestCases,
-          statusTestCases: item.statusChoosedTestCases
+          statusTestCases: item.statusChoosedTestCases,
+          initialTime: item.regressionTimer
         });
       });
     }
@@ -74,6 +79,12 @@ class Container extends Component<any, ContainerProps> {
       }
     };
 
+    const setTimer = () => {
+      this.setState({
+        pauseTime: !this.state.pauseTime
+      });
+    };
+
     const renderRegressionItem =
       this.state.testCases && this.state.testCases ? (
         this.state.testCases.map((item: any, id: number) => {
@@ -94,6 +105,20 @@ class Container extends Component<any, ContainerProps> {
         <Loader />
       );
 
+    const setCurrentTime = (time: any) => {
+      if (time) {
+        this.setState({
+          currentTimer: time
+        });
+
+        setTimeout(() => {
+          if (this.state.currentTimer) {
+            updateCurrentRegression();
+          }
+        }, 1000);
+      }
+    };
+
     const updateCurrentRegression = () => {
       if (this.state.regressionId) {
         updateRegression(this.state);
@@ -107,15 +132,37 @@ class Container extends Component<any, ContainerProps> {
         <StyledItemForm>
           {renderRegressionItem ? renderRegressionItem : <Loader />}
         </StyledItemForm>
+        {this.state.initialTime && this.state.initialTime ? (
+          <Timer
+            onPause={setTimer}
+            onResume={setTimer}
+            initialTime={this.state.initialTime}
+            direction="forward"
+          >
+            {({ resume, pause, getTime }: any) => (
+              <React.Fragment>
+                <StyledTimeLeftContainer>
+                  <StyledTimeLabel>
+                    <Timer.Minutes /> {" m : "}
+                    <Timer.Seconds />
+                    {" sec"}
+                  </StyledTimeLabel>
+                  <StyledSaveButton
+                    onClick={this.state.pauseTime ? resume : pause}
+                  >
+                    {this.state.pauseTime ? "START" : "STOP"}
+                  </StyledSaveButton>
+                </StyledTimeLeftContainer>
 
-        <StyledTimeLeftContainer>
-          <StyledTimeLabel>COMING SOON</StyledTimeLabel>
-          <StyledSaveButton>SAVE</StyledSaveButton>
-        </StyledTimeLeftContainer>
-
-        <StyledDoneButton onClick={updateCurrentRegression}>
-          DONE
-        </StyledDoneButton>
+                <StyledDoneButton onClick={() => setCurrentTime(getTime())}>
+                  DONE
+                </StyledDoneButton>
+              </React.Fragment>
+            )}
+          </Timer>
+        ) : (
+          <Loader />
+        )}
       </StyledBox>
     );
   }
@@ -166,4 +213,7 @@ interface ContainerProps {
   idTestCase?: any;
   regressionId?: string;
   unauthorized?: boolean;
+  initialTime?: any;
+  pauseTime?: boolean;
+  currentTimer?: number;
 }

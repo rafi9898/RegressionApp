@@ -14,7 +14,8 @@ export const createRegression = (regression: any) => {
         choosedTestCases: regression.allTestCases,
         statusChoosedTestCases: regression.statusChoosedTestCases,
         authorId: authorId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        regressionTimer: 1000.1
       })
       .then(() => {
         dispatch({ type: "CREATE_NEW_REGRESSION", regression });
@@ -37,7 +38,8 @@ export const updateRegression = (regression: any) => {
       .doc(regressionId)
       .update({
         regressionStatus: 1,
-        statusChoosedTestCases: regression.statusTestCases
+        statusChoosedTestCases: regression.statusTestCases,
+        regressionTimer: regression.currentTimer
       })
       .then(() => {
         dispatch({ type: "UPDATED_REGRESSION", regression });
