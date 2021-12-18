@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyledContainer, StyledMoreButton } from "./StyledContent";
 import ProjectItem from "./ProjectItem";
-import SearchBar from "./SearchBar/SearchBar";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -27,7 +26,6 @@ class Panel extends Component<any, PanelProps> {
 
     return (
       <React.Fragment>
-        <SearchBar />
         <StyledContainer>
           {renderAllProjects ? renderAllProjects : <Loader />}
         </StyledContainer>

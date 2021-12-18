@@ -7,6 +7,7 @@ import {
 
 const Item: React.SFC<ItemProps> = ({ icon, titleItem, color, link }) => {
   return (
+    //@ts-ignore
     <StyledItemContainer to={link} color={color}>
       <StyledItemIcon src={icon} alt={titleItem} />
       <StyledItemTitle>{titleItem}</StyledItemTitle>

@@ -12,6 +12,7 @@ import AddRegressionPage from "./components/pages/RegressionPage/AddRegressionPa
 import AddTestCasePage from "./components/pages/TestCasePage/AddTestCasePage/AddTestCasePage";
 import EditTestCasePage from "./components/pages/TestCasePage/EditTestCasePage/EditTestCasePage";
 import AddProjectPage from "./components/pages/AddProjectPage/AddProjectPage";
+import HistoryPage from "./components/pages/History/HistoryPage";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/retest/:id" component={ProcessPage} />
           <Route path="/regression-add" component={AddRegressionPage} />
           <Route path="/testcase-add/:id" component={AddTestCasePage} />
+          <Route path="/history" component={HistoryPage} />
           <Route
             path="/testcase-edit/:projectId/:id"
             component={EditTestCasePage}

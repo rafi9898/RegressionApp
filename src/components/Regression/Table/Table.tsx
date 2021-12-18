@@ -15,8 +15,7 @@ import Loader from "../../Loader/Loader";
 
 class Table extends Component<TableProps> {
   render() {
-    const { regression } = this.props;
-
+    const { regression, searchValue } = this.props;
     const setStatusBackground = (status: any) => {
       if (status === 0) {
         return "#24240F";
@@ -37,9 +36,12 @@ class Table extends Component<TableProps> {
       }
     };
 
-    const renderRegressionList =
-      regression &&
-      regression.reverse().map((item: any) => {
+    //@ts-ignore
+     const regressionList = searchValue !== "" ? regression.filter(item => item.regressionTitle.toUpperCase().includes(searchValue.toUpperCase())) : regression;
+
+
+    const renderRegressionList = regressionList &&
+    regressionList.reverse().map((item: any) => {
         return (
           <tr key={item.id}>
             <td>{moment(item.createdAt.toDate()).calendar()}</td>
@@ -120,4 +122,5 @@ export default compose<any>(
 interface TableProps {
   colSpan?: any;
   regression?: any;
+  searchValue?: any;
 }
